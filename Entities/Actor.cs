@@ -8,5 +8,5 @@ public class Actor
 
     public string Surname { get; set; }
 
-    public List<Movie> Movies { get; set; }
+    public List<MovieActor> MovieActors { get; set; }
 }

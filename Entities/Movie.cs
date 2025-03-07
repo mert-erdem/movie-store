@@ -18,7 +18,7 @@ public class Movie
 
     public Director? Director { get; set; }
 
-    public List<Actor> Actors { get; set; }
+    public List<MovieActor> MovieActors { get; set; }
 
-    public int Price { get; set; }
+    public float Price { get; set; }
 }
