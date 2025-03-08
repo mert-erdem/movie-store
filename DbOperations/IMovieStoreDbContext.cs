@@ -14,4 +14,6 @@ public interface IMovieStoreDbContext
     public DbSet<Movie> Movies { get; set; }
     
     public DbSet<MovieActor> MovieActors { get; set; }
+
+    int SaveChanges();
 }

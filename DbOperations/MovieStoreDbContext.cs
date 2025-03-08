@@ -37,7 +37,7 @@ public class MovieStoreDbContext : DbContext, IMovieStoreDbContext
             .HasForeignKey(ma => ma.ActorId);
     }
 
-    public override int SaveChanges()
+    public new int SaveChanges()
     {
         return base.SaveChanges();
     }
