@@ -111,5 +111,7 @@ public class DataGenerator
                 ActorId = 1,
                 MovieId = 3
             });
+        
+        dbContext.SaveChanges();
     }
 }
