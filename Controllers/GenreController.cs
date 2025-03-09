@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
+using MovieStore.App.GenreOperations.Commands.DeleteGenres;
 using MovieStore.App.GenreOperations.Commands.UpdateGenres;
 using MovieStore.App.GenreOperations.Queries;
 using MovieStore.DbOperations;
@@ -77,5 +78,21 @@ public class GenreController : ControllerBase
         command.Handle();
         
         return Ok("Genre updated!");
+    }
+
+    [HttpDelete("{id:int}")]
+    public IActionResult Delete(int id)
+    {
+        var command = new DeleteGenreCommand(_dbContext)
+        {
+            Id = id
+        };
+        
+        var validator = new DeleteGenreCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Genre deleted!");
     }
 }
