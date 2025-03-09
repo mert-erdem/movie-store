@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
+using MovieStore.App.GenreOperations.Commands.UpdateGenres;
 using MovieStore.App.GenreOperations.Queries;
 using MovieStore.DbOperations;
 
@@ -59,5 +60,22 @@ public class GenreController : ControllerBase
         command.Handle();
         
         return Ok("Genre created!");
+    }
+
+    [HttpPut("{id:int}")]
+    public IActionResult Update(int id, [FromBody] UpdateGenreCommand.UpdateGenreInputModel value)
+    {
+        var command = new UpdateGenreCommand(_dbContext)
+        {
+            Id = id,
+            Model = value
+        };
+
+        var validator = new UpdateGenreCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Genre updated!");
     }
 }
