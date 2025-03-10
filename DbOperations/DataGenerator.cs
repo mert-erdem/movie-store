@@ -71,7 +71,7 @@ public class DataGenerator
             {
                 Id = 1,
                 Name = "The Dark Knight",
-                Year = new DateTime(2008, 01, 01),
+                ReleaseDate = new DateTime(2008, 01, 01),
                 GenreId = 3,
                 DirectorId = 1,
                 Price = 3.99f
@@ -80,7 +80,7 @@ public class DataGenerator
             {
                 Id = 2,
                 Name = "Sully",
-                Year = new DateTime(2016, 01, 01),
+                ReleaseDate = new DateTime(2016, 01, 01),
                 GenreId = 2,
                 DirectorId = 2,
                 Price = 2.99f
@@ -89,7 +89,7 @@ public class DataGenerator
             {
                 Id = 3,
                 Name = "Oblivion",
-                Year = new DateTime(2013, 01, 01),
+                ReleaseDate = new DateTime(2013, 01, 01),
                 GenreId = 1,
                 DirectorId = 3,
                 Price = 1.99f
