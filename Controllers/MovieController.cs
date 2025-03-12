@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using MovieStore.App.MovieOperations.Commands;
 using MovieStore.App.MovieOperations.Queries;
 using MovieStore.DbOperations;
 
@@ -42,5 +43,21 @@ public class MovieController : ControllerBase
         var result = query.HandleWithId();
         
         return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult Add([FromBody] CreateMovieCommand.CreateMovieInputModel value)
+    {
+        var command = new CreateMovieCommand(_dbContext, _mapper)
+        {
+            Model = value
+        };
+        
+        var validator = new CreateMovieCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Movie created!");
     }
 }
