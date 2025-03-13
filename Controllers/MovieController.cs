@@ -2,6 +2,8 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.MovieOperations.Commands;
+using MovieStore.App.MovieOperations.Commands.CreateGenres;
+using MovieStore.App.MovieOperations.Commands.UpdateMovies;
 using MovieStore.App.MovieOperations.Queries;
 using MovieStore.DbOperations;
 
@@ -59,5 +61,22 @@ public class MovieController : ControllerBase
         command.Handle();
         
         return Ok("Movie created!");
+    }
+
+    [HttpPut("{id:int}")]
+    public IActionResult Update(int id, [FromBody] UpdateMovieCommand.UpdateMovieInputModel value)
+    {
+        var command = new UpdateMovieCommand(_dbContext, _mapper)
+        {
+            Id = id,
+            Model = value
+        };
+        
+        var validator = new UpdateMovieCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Movie updated!");
     }
 }

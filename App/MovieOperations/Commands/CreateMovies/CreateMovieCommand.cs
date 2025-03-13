@@ -2,7 +2,7 @@ using AutoMapper;
 using MovieStore.DbOperations;
 using MovieStore.Entities;
 
-namespace MovieStore.App.MovieOperations.Commands;
+namespace MovieStore.App.MovieOperations.Commands.CreateGenres;
 
 public class CreateMovieCommand
 {
@@ -27,17 +27,7 @@ public class CreateMovieCommand
             throw new InvalidOperationException("Movie already exists!");
         }
         
-        // var newMovie = _mapper.Map<Movie>(Model);
-        
-        var newMovie = new Movie
-        {
-            Name = Model.Name,
-            ReleaseDate = Model.ReleaseDate,
-            GenreId = Model.GenreId,
-            DirectorId = Model.DirectorId,
-            Price = Model.Price,
-            MovieActors = Model.ActorIdList.Select(id => new MovieActor { ActorId = id }).ToList()
-        };
+        var newMovie = _mapper.Map<Movie>(Model);
         
         _dbContext.Movies.Add(newMovie);
         _dbContext.SaveChanges();
