@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.MovieOperations.Commands;
 using MovieStore.App.MovieOperations.Commands.CreateGenres;
+using MovieStore.App.MovieOperations.Commands.DeleteMovies;
 using MovieStore.App.MovieOperations.Commands.UpdateMovies;
 using MovieStore.App.MovieOperations.Queries;
 using MovieStore.DbOperations;
@@ -78,5 +79,21 @@ public class MovieController : ControllerBase
         command.Handle();
         
         return Ok("Movie updated!");
+    }
+
+    [HttpDelete("{id:int}")]
+    public IActionResult Delete(int id)
+    {
+        var command = new DeleteMovieCommand(_dbContext)
+        {
+            Id = id
+        };
+        
+        var validator = new DeleteMovieCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Movie deleted!");
     }
 }

@@ -9,6 +9,4 @@ public class Director
     public string Name { get; set; }
 
     public string Surname { get; set; }
-
-    public List<Movie> Movies { get; set; }
 }
