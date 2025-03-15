@@ -1,7 +1,7 @@
 using AutoMapper;
+using MovieStore.App.ActorOperations.Queries;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
 using MovieStore.App.GenreOperations.Queries;
-using MovieStore.App.MovieOperations.Commands;
 using MovieStore.App.MovieOperations.Commands.CreateGenres;
 using MovieStore.App.MovieOperations.Commands.UpdateMovies;
 using MovieStore.App.MovieOperations.Queries;
@@ -13,7 +13,13 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        // Movies
+        CreateMovieMaps();
+        CreateActorMaps();
+        CreateGenreMaps();
+    }
+    
+    private void CreateMovieMaps()
+    {
         CreateMap<Movie, GetMovieQuery.MovieViewModel>()
             .ForMember(
                 x => x.Genre,
@@ -44,8 +50,21 @@ public class MappingProfile : Profile
                     {
                         ActorId = id
                     }).ToList()));
-        
-        // Genres
+    }
+
+    private void CreateActorMaps()
+    {
+        CreateMap<Actor, GetActorQuery.ActorViewModel>()
+            .ForMember(
+                x => x.Movies,
+                opt => opt
+                    .MapFrom(src => src.MovieActors
+                        .Select(movieActor => movieActor.Movie.Name)
+                        .ToList()));
+    }
+    
+    private void CreateGenreMaps()
+    {
         CreateMap<Genre, GetGenreQuery.GenreViewModel>();
         CreateMap<CreateGenreCommand.CreateGenreInputModel, Genre>();
     }
