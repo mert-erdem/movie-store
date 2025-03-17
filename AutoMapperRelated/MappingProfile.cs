@@ -1,4 +1,5 @@
 using AutoMapper;
+using MovieStore.App.ActorOperations.Commands.CreateActors;
 using MovieStore.App.ActorOperations.Queries;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
 using MovieStore.App.GenreOperations.Queries;
@@ -34,6 +35,7 @@ public class MappingProfile : Profile
                     .MapFrom(src => src.MovieActors
                         .Select(movieActor => movieActor.Actor.Name + " " + movieActor.Actor.Surname)
                         .ToList()));
+        
         CreateMap<CreateMovieCommand.CreateMovieInputModel, Movie>()
             .ForMember(
                 x => x.MovieActors,
@@ -42,6 +44,7 @@ public class MappingProfile : Profile
                     {
                         ActorId = id
                     }).ToList()));
+        
         CreateMap<UpdateMovieCommand.UpdateMovieInputModel, Movie>()
             .ForMember(
                 x => x.MovieActors,
@@ -61,6 +64,8 @@ public class MappingProfile : Profile
                     .MapFrom(src => src.MovieActors
                         .Select(movieActor => movieActor.Movie.Name)
                         .ToList()));
+
+        CreateMap<CreateActorCommand.CreateActorInputModel, Actor>();
     }
     
     private void CreateGenreMaps()

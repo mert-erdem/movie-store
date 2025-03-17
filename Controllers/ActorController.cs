@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using MovieStore.App.ActorOperations.Commands.CreateActors;
 using MovieStore.App.ActorOperations.Queries;
 using MovieStore.DbOperations;
 
@@ -42,5 +43,21 @@ public class ActorController : ControllerBase
         var result = query.HandleWithId();
         
         return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult Add([FromBody] CreateActorCommand.CreateActorInputModel value)
+    {
+        var command = new CreateActorCommand(_dbContext, _mapper)
+        {
+            Model = value
+        };
+        
+        var validator = new CreateActorCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Actor created");
     }
 }
