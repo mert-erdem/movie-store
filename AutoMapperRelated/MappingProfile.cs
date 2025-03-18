@@ -1,5 +1,6 @@
 using AutoMapper;
 using MovieStore.App.ActorOperations.Commands.CreateActors;
+using MovieStore.App.ActorOperations.Commands.UpdateActors;
 using MovieStore.App.ActorOperations.Queries;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
 using MovieStore.App.GenreOperations.Queries;
@@ -66,6 +67,7 @@ public class MappingProfile : Profile
                         .ToList()));
 
         CreateMap<CreateActorCommand.CreateActorInputModel, Actor>();
+        CreateMap<UpdateActorCommand.UpdateActorInputModel, Actor>();
     }
     
     private void CreateGenreMaps()
