@@ -2,6 +2,7 @@ using AutoMapper;
 using MovieStore.App.ActorOperations.Commands.CreateActors;
 using MovieStore.App.ActorOperations.Commands.UpdateActors;
 using MovieStore.App.ActorOperations.Queries;
+using MovieStore.App.DirectorOperations.Commands.CreateDirectors;
 using MovieStore.App.DirectorOperations.Queries;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
 using MovieStore.App.GenreOperations.Queries;
@@ -62,6 +63,7 @@ public class MappingProfile : Profile
     {
         CreateMap<Director, GetDirectorQuery.DirectorViewModel>();
         CreateMap<Director, GetDirectorQuery.DetailedDirectorViewModel>();
+        CreateMap<CreateDirectorCommand.CreateDirectorInputModel, Director>();
     }
 
     private void CreateActorMaps()

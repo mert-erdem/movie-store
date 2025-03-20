@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using MovieStore.App.DirectorOperations.Commands.CreateDirectors;
 using MovieStore.App.DirectorOperations.Queries;
 using MovieStore.DbOperations;
 
@@ -42,5 +43,21 @@ public class DirectorController : ControllerBase
         var result = query.HandleWithId();
         
         return Ok(result);
+    }
+    
+    [HttpPost]
+    public IActionResult Add([FromBody] CreateDirectorCommand.CreateDirectorInputModel value)
+    {
+        var command = new CreateDirectorCommand(_dbContext, _mapper)
+        {
+            Model = value
+        };
+        
+        var validator = new CreateDirectorCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Director created!");
     }
 }

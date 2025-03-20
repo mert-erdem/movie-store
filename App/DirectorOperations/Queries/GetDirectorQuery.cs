@@ -31,7 +31,7 @@ public class GetDirectorQuery
 
         if (director is null)
         {
-            throw new InvalidOperationException("Actor not found!");
+            throw new InvalidOperationException("Director not found!");
         }
         
         var directorViewModel = _mapper.Map<DetailedDirectorViewModel>(director);
