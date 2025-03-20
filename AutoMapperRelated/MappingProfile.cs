@@ -2,6 +2,7 @@ using AutoMapper;
 using MovieStore.App.ActorOperations.Commands.CreateActors;
 using MovieStore.App.ActorOperations.Commands.UpdateActors;
 using MovieStore.App.ActorOperations.Queries;
+using MovieStore.App.DirectorOperations.Queries;
 using MovieStore.App.GenreOperations.Commands.CreateGenres;
 using MovieStore.App.GenreOperations.Queries;
 using MovieStore.App.MovieOperations.Commands.CreateGenres;
@@ -17,6 +18,7 @@ public class MappingProfile : Profile
     {
         CreateMovieMaps();
         CreateActorMaps();
+        CreateDirectorMaps();
         CreateGenreMaps();
     }
     
@@ -54,6 +56,12 @@ public class MappingProfile : Profile
                     {
                         ActorId = id
                     }).ToList()));
+    }
+
+    private void CreateDirectorMaps()
+    {
+        CreateMap<Director, GetDirectorQuery.DirectorViewModel>();
+        CreateMap<Director, GetDirectorQuery.DetailedDirectorViewModel>();
     }
 
     private void CreateActorMaps()
