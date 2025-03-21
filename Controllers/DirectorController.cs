@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.DirectorOperations.Commands.CreateDirectors;
+using MovieStore.App.DirectorOperations.Commands.DeleteDirectors;
 using MovieStore.App.DirectorOperations.Commands.UpdateDirectors;
 using MovieStore.App.DirectorOperations.Queries;
 using MovieStore.DbOperations;
@@ -77,5 +78,21 @@ public class DirectorController : ControllerBase
         command.Handle();
         
         return Ok("Director updated!");
+    }
+    
+    [HttpDelete("{id:int}")]
+    public IActionResult Delete(int id)
+    {
+        var command = new DeleteDirectorCommand(_dbContext)
+        {
+            Id = id
+        };
+
+        var validator = new DeleteDirectorCommandValidator();
+        validator.ValidateAndThrow(command);
+        
+        command.Handle();
+        
+        return Ok("Director deleted!");
     }
 }
