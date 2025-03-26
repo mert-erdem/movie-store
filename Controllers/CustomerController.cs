@@ -51,4 +51,17 @@ public class CustomerController : ControllerBase
 
         return token;
     }
+
+    [HttpGet("connect/refreshToken")]
+    public ActionResult<Token> RefreshToken([FromQuery] string refreshToken)
+    {
+        var command = new RefreshTokenCommand(_dbContext, _configuration)
+        {
+            RefreshToken = refreshToken
+        };
+        
+        var token = command.Handle();
+
+        return token;
+    }
 }
