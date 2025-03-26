@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace MovieStore.App.CustomerOperations;
+namespace MovieStore.App.CustomerOperations.Commands;
 
 public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
 {
