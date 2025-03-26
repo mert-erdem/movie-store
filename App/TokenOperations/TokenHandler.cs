@@ -37,7 +37,7 @@ public class TokenHandler
         return token;
     }
 
-    private string CreateRefreshToken()
+    private static string CreateRefreshToken()
     {
         return Guid.NewGuid().ToString();
     }

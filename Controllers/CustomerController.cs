@@ -14,7 +14,7 @@ public class CustomerController : ControllerBase
 {
     private readonly IMovieStoreDbContext _dbContext;
     private readonly IMapper _mapper;
-    private IConfiguration _configuration;
+    private readonly IConfiguration _configuration;
 
     public CustomerController(IMovieStoreDbContext dbContext, IMapper mapper, IConfiguration configuration)
     {
