@@ -17,5 +17,7 @@ public interface IMovieStoreDbContext
     
     public DbSet<Customer> Customers { get; set; }
 
+    public DbSet<Purchase> Purchases { get; set; }
+
     int SaveChanges();
 }

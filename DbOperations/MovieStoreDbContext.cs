@@ -17,6 +17,8 @@ public class MovieStoreDbContext : DbContext, IMovieStoreDbContext
     
     public DbSet<Customer> Customers { get; set; }
 
+    public DbSet<Purchase> Purchases { get; set; }
+
     public MovieStoreDbContext(DbContextOptions<MovieStoreDbContext> options) : base(options)
     {
     }
