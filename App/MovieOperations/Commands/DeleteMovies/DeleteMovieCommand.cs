@@ -21,8 +21,13 @@ public class DeleteMovieCommand
         {
             throw new InvalidOperationException("Movie not found!");
         }
-        
-        _dbContext.Movies.Remove(movie);
+
+        if (!movie.IsActive)
+        {
+            throw new InvalidOperationException("Movie already deactivated!");
+        }
+
+        movie.IsActive = false;
         
         _dbContext.SaveChanges();
     }

@@ -24,6 +24,7 @@ public class GetMovieQuery
             .Include(x => x.Director)
             .Include(x => x.MovieActors)
             .ThenInclude(x => x.Actor)
+            .Where(x => x.IsActive)
             .OrderBy(x => x.Id)
             .ToList();
         
@@ -44,6 +45,11 @@ public class GetMovieQuery
         if (movie is null)
         {
             throw new InvalidOperationException("Movie not found!");
+        }
+
+        if (!movie.IsActive)
+        {
+            throw new InvalidOperationException("Movie was deactivated!");
         }
         
         var movieViewModel = _mapper.Map<MovieViewModel>(movie);
