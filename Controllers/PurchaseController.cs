@@ -3,12 +3,13 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.App.PurchaseOperations;
+using MovieStore.App.PurchaseOperations.Queries.GetPurchases;
 using MovieStore.DbOperations;
 
 namespace MovieStore.Controllers;
 
 [ApiController]
-[Route("api/purchase")]
+[Route("api/[controller]s")]
 [Authorize]
 public class PurchaseController : ControllerBase
 {
@@ -19,6 +20,24 @@ public class PurchaseController : ControllerBase
     {
         _dbContext = dbContext;
         _mapper = mapper;
+    }
+
+    /// <summary>
+    /// Returns a customer's purchases via customer ID.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id:int}")]
+    public IActionResult Get(int id)
+    {
+        var query = new GetPurchaseQuery(_dbContext, _mapper)
+        {
+            CustomerId = id
+        };
+
+        var result = query.Handle();
+
+        return Ok(result);
     }
 
     [HttpPost]

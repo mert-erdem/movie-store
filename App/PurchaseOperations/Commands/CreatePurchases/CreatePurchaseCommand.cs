@@ -36,6 +36,9 @@ public class CreatePurchaseCommand
         var purchase = _mapper.Map<Purchase>(Model);
         purchase.Price = movie.Price;
         purchase.Time = DateTime.Now;
+
+        customer.PurchasedMovieIds ??= [];
+        customer.PurchasedMovieIds.Add(purchase.MovieId);
         
         _dbContext.Purchases.Add(purchase);
         _dbContext.SaveChanges();

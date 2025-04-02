@@ -10,7 +10,9 @@ public class Purchase
 
     public int MovieId { get; set; }
 
-    public float Price { get; set; }
+    public Movie? Movie { get; set; }
+
+    public double Price { get; set; }
 
     public DateTime Time { get; set; }
 }

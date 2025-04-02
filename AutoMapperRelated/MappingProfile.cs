@@ -12,6 +12,7 @@ using MovieStore.App.MovieOperations.Commands.CreateGenres;
 using MovieStore.App.MovieOperations.Commands.UpdateMovies;
 using MovieStore.App.MovieOperations.Queries;
 using MovieStore.App.PurchaseOperations;
+using MovieStore.App.PurchaseOperations.Queries.GetPurchases;
 using MovieStore.Entities;
 
 namespace MovieStore.AutoMapperRelated;
@@ -100,5 +101,8 @@ public class MappingProfile : Profile
     private void CreatePurchaseMaps()
     {
         CreateMap<CreatePurchaseCommand.CreatePurchaseInputModel, Purchase>();
+        CreateMap<Purchase, GetPurchaseQuery.PurchaseViewModel>()
+            .ForMember(x => x.MovieName, opt => opt
+                .MapFrom(src => src.Movie!.Name));
     }
 }
