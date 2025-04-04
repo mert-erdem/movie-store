@@ -11,6 +11,7 @@ The **Movie Store** is a full-featured CRUD application built using **ASP.NET Co
 - **Movie Operations**: Add, edit, delete, and view movies.
 - **Purchase Operations**: Add and view purchases (customer's only).
 - **Customer Authentication**: Secure login and registration.
+- **Custom Exception Middleware**: Centralized error handling for cleaner and consistent API responses.
 
 ## Technologies Used
 - **ASP.NET Core 9** (Web API)
